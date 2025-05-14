@@ -1,7 +1,6 @@
 {
   "name": "noteit",
   "homepage": "https://heehaw1234.github.io/experthomosapiens",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
