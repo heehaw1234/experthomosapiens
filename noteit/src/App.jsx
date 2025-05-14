@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const Card = ({ title }) => {
+  const [hasLiked, setHasLiked] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="card_container">
+      <h2 className="title">{title}</h2>
+      <img
+        className="card_img"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"
+        alt="Card image"
+      />
+      <button className="likebtn" onClick={() => setHasLiked(!hasLiked)}>
+        {hasLiked ? "✔" : "Like"}
+      </button>
+    </div>
+  );
+};
 
-export default App
+const Topbar = () => {
+  return (
+    <div className="topbar">
+      <div className="noteit">NoteIt</div>
+      <div className="auth-buttons">
+        <button className="btn">Sign In</button>
+        <button className="btn">Login</button>
+      </div>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <div className="app">
+      <Topbar />
+      <div className="card_blk">
+        <Card title="Star Wars" />
+        <Card title="Avatar" />
+        <Card title="The Lion King" />
+        <Card title="Niggertron" />
+        <Card title="Jurassic Park" />
+        <Card title="Minecraft Movie" />
+      </div>
+    </div>
+  );
+};
+
+export default App;
