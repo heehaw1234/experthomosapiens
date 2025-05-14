@@ -4,6 +4,12 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: #f4f4f9;
+  background-image: url("https://images.unsplash.com/photo-1747110325205-cb454d10ad1c?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  width: 100%;
 }
 
 .app {
@@ -53,12 +59,13 @@ body {
   margin-top: 2rem;
 }
 
-.card_container {
+.card {
   width: 18rem;
   height: 22rem;
   background-color: #fff;
   border-radius: 12px;
   padding: 1.5rem;
+  margin: 1rem 0.5rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
@@ -67,7 +74,7 @@ body {
   justify-content: space-between;
 }
 
-.card_container:hover {
+.card:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }

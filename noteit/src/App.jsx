@@ -5,7 +5,7 @@ const Card = ({ title }) => {
   const [hasLiked, setHasLiked] = useState(false);
 
   return (
-    <div className="card_container">
+    <div className="card">
       <h2 className="title">{title}</h2>
       <img
         className="card_img"
@@ -39,9 +39,15 @@ const App = () => {
         <Card title="Star Wars" />
         <Card title="Avatar" />
         <Card title="The Lion King" />
-        <Card title="Niggertron" />
+        <Card title="Transformers" />
         <Card title="Jurassic Park" />
         <Card title="Minecraft Movie" />
+        <Card title="Jujutsu Kaisen" />
+        <Card title="One Punch Man" />
+        <Card title="Demon Slayer: Mugen Train" />
+        <Card title="Chainsaw Man" />
+        <Card title="HunterXHunter" />
+        <Card title="Big Bang Theory" />
       </div>
     </div>
   );
