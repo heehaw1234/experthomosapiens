@@ -139,6 +139,23 @@ body {
   overflow: hidden;
 }
 
+#downloadtag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.25rem auto;
+  width: 12rem;
+  height: 2.5rem;
+  background-color: #6a4c93;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+}
+
+
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
@@ -164,8 +181,9 @@ body {
 
 .likebtn {
   align-self: center;
+  height: 2.5rem;
   width: 80%;
-  margin-top: auto;
+  margin-top: 0.25rem;
 }
 
 /* ========== Special Interactions ========== */

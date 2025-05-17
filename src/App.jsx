@@ -4,12 +4,16 @@ import './App.css';
 
 const Card = ({ title, url }) => {
   const [hasLiked, setHasLiked] = useState(false);
+  const [hasDownloaded, setHasDownloaded] = useState(false);
 
   return (
     <div className="card">
       <h2 className="title">{title}</h2>
-      <a href={url} className="card_img" target="_blank" rel="noreferer">
+      <a href={url} className="card_img" target="_blank" rel="noreferrer">
         <img className="card_img" src={url} alt="Card image"/>
+      </a>
+      <a href={url} target="_blank">
+        <button id="downloadtag" onClick={() => setHasDownloaded(!hasDownloaded)}>download</button>
       </a>
       <button className="likebtn" onClick={() => setHasLiked(!hasLiked)}>
         {hasLiked ? "✔" : "Like"}
@@ -39,14 +43,6 @@ const Topbar = () => {
           </DialogActions>
         </Dialog>
       </div>
-    </div>
-  );
-};
-
-const Bottombar = () => {
-  return (
-    <div className="bottombar">
-
     </div>
   );
 };
@@ -94,23 +90,10 @@ const App = () => {
         {cards.map((card, index) => (
           <Card key={index} title={card.title} url={card.url} />
         ))}
-
-        <Card title="Star Wars" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="Avatar" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="The Lion King" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="Transformers" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="Jurassic Park" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="Minecraft Movie" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="Jujutsu Kaisen" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="One Punch Man" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="Demon Slayer: Mugen Train" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="Chainsaw Man" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="Hunter X Hunter" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
-        <Card title="Big Bang Theory" url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png"/>
       </div>
 
       <div id="bottomspace1"></div>
-      <Bottombar />
+      <div className="bottombar"></div>
       <div id="bottomspace2"></div>
     </div>
   );
