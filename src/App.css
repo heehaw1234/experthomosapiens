@@ -1,4 +1,4 @@
-body {
+body {              /*main body*/
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
@@ -10,16 +10,13 @@ body {
   background-attachment: fixed;
   height: 100vh;
   width: 100%;
-}
-
-.app {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
-.topbar {
+.topbar {       /*top bar*/
   background-color: #6a4c93;
   color: #fff;
   display: flex;
@@ -30,13 +27,13 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.noteit {
+.noteit {       /*logo*/
   font-weight: bold;
   font-size: 2rem;
   font-family: 'Lucida Sans', 'Lucida Grande', sans-serif;
 }
 
-.auth-buttons .btn {
+.auth-buttons .btn {  /*all buttons and login buttons*/
   background-color: #6a4c93;
   color: white;
   border: none;
@@ -45,6 +42,42 @@ body {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+#dialog_login .MuiDialog-paper {  /*main dialog box*/
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.MuiDialogTitle-root {          /*login/signup text*/
+  color: #3f51b5;
+}
+
+.dialog_content {               /*header for login categories*/
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.login {                        /*user's login/signup details*/
+  width: 93%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.MuiDialogActions-root button { /*close button*/
+  background-color: #3f51b5;
+  color: white;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .auth-buttons .btn:hover {
@@ -85,6 +118,7 @@ body {
   border-radius: 8px;
   margin-bottom: 1rem;
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .card_img:hover {
@@ -92,7 +126,7 @@ body {
 }
 
 .title {
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #333;
   margin-bottom: 1rem;
@@ -111,4 +145,13 @@ body {
 
 .likebtn:hover {
   background-color: #512776;
+}
+
+button:active {
+  transition: transform 0.3s ease;
+  transform: scale(1.2);
+}
+
+img:active {
+  transform: scale(3); /* Scale up the image to 1.5 times its size */
 }
