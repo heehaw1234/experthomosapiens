@@ -6,7 +6,7 @@
 body {
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
   background-color: #f4f6fc;
-  background-image: url("https://images.unsplash.com/photo-1747110325205-cb454d10ad1c?q=80&w=2574&auto=format&fit=crop");
+  background-image: url("assets/DONOTCLICK.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -17,26 +17,18 @@ body {
   margin: 0 auto;
 }
 
-/* ========== Topbar ========== */
-.topbar {
-  background-color: #ffffffdd;
-  backdrop-filter: blur(5px);
-  color: #333;
+.container {
+  background-color: #ffffffcc; /* semi-transparent white */
+  backdrop-filter: blur(10px); /* subtle glass effect */
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 2rem auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  margin-bottom: 1rem;
+  flex-direction: column;
+  gap: 1.5rem;
 }
-
-.noteit {
-  font-weight: 600;
-  font-size: 2rem;
-  color: #6a4c93;
-}
-
 /* ========== Buttons ========== */
 .auth-buttons .btn,
 .MuiDialogActions-root button,
@@ -90,83 +82,6 @@ body {
   transition: border-color 0.3s ease;
 }
 
-/* ========== Function Bar ========== */
-#functionbar {
-  background-color: #ffffffcc;
-  backdrop-filter: blur(5px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
-}
-
-#functionbar button {
-  font-weight: 600;
-}
-
-#search_bar {
-  width: 18rem;
-  padding: 0.6rem 1rem;
-  border-radius: 30px;
-  border: 1px solid #ccc;
-  outline: none;
-}
-
-/* ========== Card Section ========== */
-.card_blk {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
-
-/* ========== Card ========== */
-.card {
-  width: 17rem;
-  height: auto;
-  background-color: #fff;
-  border-radius: 16px;
-  padding: 1rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
-}
-
-.card_img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.card_img:hover {
-  transform: scale(1.03);
-}
-
-.title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
-.likebtn {
-  align-self: center;
-  width: 80%;
-  margin-top: auto;
-}
 
 /* ========== Special Interactions ========== */
 button:active {
