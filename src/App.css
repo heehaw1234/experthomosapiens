@@ -1,157 +1,198 @@
-body {              /*main body*/
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
+/* ========== Base Styles ========== */
+* {
   box-sizing: border-box;
-  background-color: #f4f4f9;
-  background-image: url("https://images.unsplash.com/photo-1747110325205-cb454d10ad1c?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background-color: #f4f6fc;
+  background-image: url("https://images.unsplash.com/photo-1747110325205-cb454d10ad1c?q=80&w=2574&auto=format&fit=crop");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  margin: 0;
+  padding: 2rem;
   height: 100vh;
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
-.topbar {       /*top bar*/
+/* ========== Topbar ========== */
+.topbar {
+  background-color: #ffffffdd;
+  backdrop-filter: blur(5px);
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+}
+
+.noteit {
+  font-weight: 600;
+  font-size: 2rem;
+  color: #6a4c93;
+}
+
+/* ========== Buttons ========== */
+.auth-buttons .btn,
+.MuiDialogActions-root button,
+.likebtn {
   background-color: #6a4c93;
   color: #fff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-buttons .btn:hover,
+.likebtn:hover,
+.MuiDialogActions-root button:hover {
+  background-color: #553175;
+  transform: scale(1.05);
+}
+
+/* ========== Dialog (Login Box) ========== */
+#dialog_login .MuiDialog-paper {
+  width: 50rem;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.MuiDialogTitle-root {
+  color: #6a4c93;
+  font-weight: 600;
+}
+
+.dialog_content {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.login {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f8f9fa;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+/* ========== Function Bar ========== */
+#functionbar {
+  background-color: #ffffffcc;
+  backdrop-filter: blur(5px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
 }
 
-.noteit {       /*logo*/
-  font-weight: bold;
-  font-size: 2rem;
-  font-family: 'Lucida Sans', 'Lucida Grande', sans-serif;
+#functionbar button {
+  font-weight: 600;
 }
 
-.auth-buttons .btn {  /*all buttons and login buttons*/
-  background-color: #6a4c93;
-  color: white;
-  border: none;
-  padding: 0.5rem 1.5rem;
+#search_bar {
+  width: 18rem;
+  padding: 0.6rem 1rem;
   border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  border: 1px solid #ccc;
+  outline: none;
 }
 
-#dialog_login .MuiDialog-paper {  /*main dialog box*/
-  padding: 20px;
-  width: 400px;
-  border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-
-.MuiDialogTitle-root {          /*login/signup text*/
-  color: #3f51b5;
-}
-
-.dialog_content {               /*header for login categories*/
-  font-size: 1.1rem;
-  color: #333;
-}
-
-.login {                        /*user's login/signup details*/
-  width: 93%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: 1rem;
-  background-color: #f9f9f9;
-  transition: border-color 0.3s ease;
-}
-
-.MuiDialogActions-root button { /*close button*/
-  background-color: #3f51b5;
-  color: white;
-  padding: 8px 16px;
-  font-size: 1rem;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.auth-buttons .btn:hover {
-  background-color: #512776;
-}
-
+/* ========== Card Section ========== */
 .card_blk {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  margin-top: 2rem;
 }
 
+/* ========== Card ========== */
 .card {
-  width: 18rem;
-  height: 22rem;
+  width: 17rem;
+  height: auto;
   background-color: #fff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1rem 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
 }
 
 .card_img {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 1rem;
   transition: transform 0.3s ease;
-  cursor: pointer;
 }
 
 .card_img:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .title {
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: #333;
   margin-bottom: 1rem;
 }
 
 .likebtn {
-  padding: 0.8rem 1.5rem;
-  background-color: #6a4c93;
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  align-self: center;
+  width: 80%;
+  margin-top: auto;
 }
 
-.likebtn:hover {
-  background-color: #512776;
-}
-
+/* ========== Special Interactions ========== */
 button:active {
-  transition: transform 0.3s ease;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 img:active {
-  transform: scale(3); /* Scale up the image to 1.5 times its size */
+  transform: scale(2.5);
+}
+
+/* ========== Misc Layout ========== */
+#bottomspace1 {
+  height: 4rem;
+}
+
+#bottomspace2 {
+  height: 1rem;
+}
+
+.bottombar {
+  background-color: #ffffffcc;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
