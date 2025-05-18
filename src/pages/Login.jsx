@@ -8,7 +8,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Link as MuiLink } from '@mui/material';
 import { sendPasswordResetEmail } from "firebase/auth";
 
-const Login = () => {
+const Login = ({setLoggedIn}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ const Login = () => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log("Logged in as:", userCredential.user.email);
+            setLoggedIn(true);
             navigate("/dashboard"); // change route to your actual main page
         } catch (error) {
             console.error("Login failed:", error.message);

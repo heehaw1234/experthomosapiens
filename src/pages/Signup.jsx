@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Box, TextField, Button, Typography, Paper } from '@mui/material';
 import { containerBox , authPaper, titleText, submitButton} from "../styles/authStyles";
 import { useNavigate } from 'react-router-dom';
-import { auth } from "../firebase.js";
+import { auth , db} from "../firebase.js";
+import { doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Link as RouterLink } from 'react-router-dom';
 import { Link as MuiLink } from '@mui/material';
@@ -12,6 +13,7 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [userName, setUserName] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -23,7 +25,13 @@ const Signup = () => {
     }
 
     try {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        await setDoc(doc(db, "users", user.uid), {
+            username: userName,
+            email: email,
+        })
         navigate("/dashboard"); // or redirect wherever you want after sign up
     } catch (error) {
         console.error("Signup Error:", error.message);
@@ -72,6 +80,15 @@ const Signup = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        fullWidth
+                        required
+                    />
+                    <TextField
+                        variant="outlined"
+                        label="Username"
+                        type="text"
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
                         fullWidth
                         required
                     />
