@@ -13,14 +13,21 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState('');
 
-  // Listen to Firebase auth state changes for refresh
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setLoggedIn(!!user);
+      if (user) {
+        setLoggedIn(true);
+        const atIndex = user.email.indexOf('@');
+        setUsername(user.email.substring(0, atIndex));
+      } else {
+        setLoggedIn(false);
+        setUsername('');
+      }
       setLoading(false);
     });
-    
+
     return () => unsubscribe();
   }, []);
 
@@ -35,7 +42,7 @@ const App = () => {
   return (
     <div className="app">
       <HashRouter>
-        <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route 
@@ -55,6 +62,7 @@ const App = () => {
                   onFileUpload={addCard}
                   searchTerm={searchTerm}
                   onSearch={setSearchTerm}
+                  username={username}
                 /> :
                 <Navigate to="/login" replace />
             }

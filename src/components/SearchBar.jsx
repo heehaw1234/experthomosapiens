@@ -1,6 +1,6 @@
-import {useRef} from "react";
+import { useRef } from "react";
 
-const SearchBar = ({ onFileUpload, username}) => {
+const SearchBar = ({ onFileUpload, searchTerm, onSearch }) => {
     const fileInputRef = useRef(null);
 
     const handleFileChange = (event) => {
@@ -13,7 +13,7 @@ const SearchBar = ({ onFileUpload, username}) => {
 
     return (
         <div id="functionbar">
-            <button onClick={() => fileInputRef.current.click()}>Upload File</button>
+            <button className = "likebtn" onClick={() => fileInputRef.current.click()}>Upload File</button>
             <input
                 type="file"
                 ref={fileInputRef}
@@ -21,16 +21,13 @@ const SearchBar = ({ onFileUpload, username}) => {
                 style={{ display: 'none' }}
                 accept="image/*,application/pdf"
             />
-            <div            //welcome message + CSS
-                style={{
-                    marginTop: '10px',
-                    fontSize: '18px',
-                    color: '#6a4c93',
-                    fontWeight: 'bold',
-                    fontFamily: 'Arial, sans-serif'
-                }}
-            >Welcome, {username}
-            </div>
+            <input
+                id="search_bar"
+                type="text"
+                placeholder="Search by title..."
+                value={searchTerm}
+                onChange={(e) => onSearch(e.target.value)}
+            />
         </div>
     );
 };

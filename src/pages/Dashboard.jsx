@@ -6,20 +6,10 @@ const Dashboard = ({ cards, onFileUpload, searchTerm, onSearch }) => {
     const auth = getAuth();
     const user = auth.currentUser;
     
-    const cardBlkStyle = {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: '2rem'
-    }
-
     // Safety check in case component renders before auth is fully loaded
     if (!user) {
-        return <div>Loading user data...</div>;
+        return <div className="loading">Loading user data...</div>;
     }
-    
-    const atIndex = user.email.indexOf("@");
-    const username = user.email.substring(0, atIndex);
     
     const filteredCards = cards.filter(card =>
         card.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -27,18 +17,23 @@ const Dashboard = ({ cards, onFileUpload, searchTerm, onSearch }) => {
     
     return (
         <>
-            <SearchBar onFileUpload={onFileUpload} username={username}/>
-            <input
-                type="text"
-                placeholder="Search by title..."
-                value={searchTerm}
-                onChange={(e) => onSearch(e.target.value)}
+            <SearchBar
+                onFileUpload={onFileUpload}
+                searchTerm={searchTerm}
+                onSearch={onSearch}
             />
-            <div style={cardBlkStyle}>
+            
+            <div className="card_blk">
                 {filteredCards.map((card, index) => (
-                    <Card key={index} title={card.title} url={card.url} type={card.type}/>
+                    <Card 
+                        key={index} 
+                        title={card.title} 
+                        url={card.url}
+                        type={card.type} 
+                    />
                 ))}
             </div>
+            
             <div id="bottomspace1" />
             <div className="bottombar" />
             <div id="bottomspace2" />

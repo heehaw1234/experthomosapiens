@@ -56,13 +56,46 @@
 }
 
 .likebtn {
-  align-self: center;
-  height: 2.5rem;
-  width: 80%;
-  margin-top: 0.25rem;
+    align-self: center;
+    height: 2.5rem;
+    width: auto;
+    margin-top: 0.25rem;
+    background-color: rgb(59, 156, 59);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+.likedbtn {
+    align-self: center;
+    height: 2.5rem;
+    width: auto;
+    margin-top: 0.25rem;
+    background-color: #6a4c93;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
 
 #likecount {
   margin-left: auto;
   margin-right: auto;
+}
+
+#functionbar {
+    display: flex;
+}
+
+#cardbtns {
+    display: flex;
+    justify-content: space-evenly;
 }

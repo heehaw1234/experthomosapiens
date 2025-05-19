@@ -5,7 +5,7 @@
 
 body {
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  background-color: #f4f6fc;
+  background-color: #ffffffdd;
   background-image: url("https://images.unsplash.com/photo-1525947088131-b701cd0f6dc3?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   background-size: cover;
   background-position: center;
@@ -17,9 +17,13 @@ body {
   margin: 0 auto;
 }
 
+.app {
+  background-color: #ffffffdd;
+  border-radius: 2rem;
+}
+
 /* ========== Topbar ========== */
 .topbar {
-  background-color: #ffffffdd;
   backdrop-filter: blur(5px);
   color: #333;
   display: flex;
@@ -39,8 +43,7 @@ body {
 
 /* ========== Buttons ========== */
 .auth-buttons .btn,
-.MuiDialogActions-root button,
-.likebtn {
+.MuiDialogActions-root button{
   background-color: #6a4c93;
   color: #fff;
   border: none;
@@ -52,7 +55,6 @@ body {
 }
 
 .auth-buttons .btn:hover,
-.likebtn:hover,
 .MuiDialogActions-root button:hover {
   background-color: #553175;
   transform: scale(1.05);
@@ -92,14 +94,11 @@ body {
 
 /* ========== Function Bar ========== */
 #functionbar {
-  background-color: #ffffffcc;
-  backdrop-filter: blur(5px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   margin-bottom: 2rem;
 }
 
@@ -190,16 +189,10 @@ img:active {
 }
 
 .bottombar {
-  background-color: #ffffffcc;
   color: #333;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-#likecount {
-  
 }

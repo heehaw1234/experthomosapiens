@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Routes, useNavigate, Link} from "react-router-dom"
 import {Button} from "@mui/material";
 
 //add logic about if log in then change buttons to log out only
-const NavBar = ({loggedIn, setLoggedIn}) => {
+const NavBar = ({loggedIn, setLoggedIn, username}) => {
     const navigate = useNavigate();
 
     const goToHome = () => {
@@ -45,6 +45,15 @@ const NavBar = ({loggedIn, setLoggedIn}) => {
         <div className="navbar">
             <div className="noteit" onClick ={goToHome}>
                 Noteit
+            </div>
+            <div            //welcome message + CSS
+                style={{
+                    fontSize: '18px',
+                    color: '#6a4c93',
+                    fontWeight: 'bold',
+                    fontFamily: 'Arial, sans-serif'
+                }}
+            >{loggedIn ? `Welcome, ${username}` : ""}
             </div>
             {loggedIn ? loggedInButtons() : loggedOutButtons()}
         </div>
