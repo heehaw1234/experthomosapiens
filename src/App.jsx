@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { HashRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import NavBar from './components/NavBar.jsx';
@@ -20,7 +20,7 @@ const App = () => {
       setLoggedIn(!!user);
       setLoading(false);
     });
-
+    
     return () => unsubscribe();
   }, []);
 
@@ -29,12 +29,12 @@ const App = () => {
   };
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
     <div className="app">
-      <BrowserRouter basename="/experthomosapiens">
+      <HashRouter>
         <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Routes>
           <Route path="/signup" element={<Signup />} />
@@ -61,7 +61,7 @@ const App = () => {
           />
           <Route path="/" element={<Navigate to={loggedIn ? "/dashboard" : "/login"} replace />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };
