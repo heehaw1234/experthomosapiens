@@ -1,27 +1,36 @@
-import { useRef, useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import NavBar from './components/NavBar.jsx';
-import Card from './components/Card.jsx';
-import SearchBar from './components/SearchBar.jsx';
-import About from './pages/About.jsx';
 import Dashboard from './pages/Dashboard.jsx';
-
-
-
-
+import { auth } from './firebase.js';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const App = () => {
   const [cards, setCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Listen to Firebase auth state changes for refresh
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setLoggedIn(!!user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const addCard = (fileData) => {
     setCards(prev => [...prev, fileData]);
   };
 
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
 
   return (
     <div className="app">
@@ -29,18 +38,28 @@ const App = () => {
         <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Routes>
           <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
+          <Route 
+            path="/login" 
+            element={
+              loggedIn ? 
+                <Navigate to="/dashboard" replace /> : 
+                <Login setLoggedIn={setLoggedIn} />
+            } 
+          />
           <Route
             path="/dashboard"
             element={
-              <Dashboard
-                cards={cards}
-                onFileUpload={addCard}
-                searchTerm={searchTerm}
-                onSearch={setSearchTerm}
-              />
+              loggedIn ? 
+                <Dashboard
+                  cards={cards}
+                  onFileUpload={addCard}
+                  searchTerm={searchTerm}
+                  onSearch={setSearchTerm}
+                /> :
+                <Navigate to="/login" replace />
             }
           />
+          <Route path="/" element={<Navigate to={loggedIn ? "/dashboard" : "/login"} replace />} />
         </Routes>
       </BrowserRouter>
     </div>

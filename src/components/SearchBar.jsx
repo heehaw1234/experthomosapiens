@@ -1,6 +1,6 @@
 import {useRef} from "react";
 
-const SearchBar = ({ onFileUpload }) => {
+const SearchBar = ({ onFileUpload, username}) => {
     const fileInputRef = useRef(null);
 
     const handleFileChange = (event) => {
@@ -21,6 +21,16 @@ const SearchBar = ({ onFileUpload }) => {
                 style={{ display: 'none' }}
                 accept="image/*,application/pdf"
             />
+            <div            //welcome message + CSS
+                style={{
+                    marginTop: '10px',
+                    fontSize: '18px',
+                    color: '#6a4c93',
+                    fontWeight: 'bold',
+                    fontFamily: 'Arial, sans-serif'
+                }}
+            >Welcome, {username}
+            </div>
         </div>
     );
 };
