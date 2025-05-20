@@ -16,8 +16,15 @@ const SearchBar = ({ onFileUpload, searchTerm, onSearch }) => {
         const file = event.target.files[0];
         if (!file || !customTitle) return;
 
-        const fileURL = URL.createObjectURL(file);
-        onFileUpload({ title: customTitle, url: fileURL });
+        // Create a more structured file data object that includes the actual file
+        // for Supabase storage upload
+        onFileUpload({
+            title: customTitle,
+            file: file,
+            fileName: file.name,
+            type: file.type
+        });
+        
         setCustomTitle("");  // Reset after upload
         event.target.value = "";  // Reset file input so same file can be re-uploaded
     };

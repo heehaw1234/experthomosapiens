@@ -5,9 +5,7 @@ import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import NavBar from './components/NavBar.jsx';
 import Dashboard from './pages/Dashboard.jsx';
-import { auth, db } from './firebase.js';
-import { onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
+import { supabase } from './supabase.js';
 
 const App = () => {
   const [cards, setCards] = useState([]);
@@ -15,57 +13,162 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState(null);
 
-  // Fetch all cards from Firestore
+  // Fetch all cards from Supabase
   const fetchCards = async () => {
-    const querySnapshot = await getDocs(collection(db, "cards"));
-    const cardsArr = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-    setCards(cardsArr);
+    try {
+      const { data, error } = await supabase
+        .from('cards')
+        .select('*');
+      
+      if (error) {
+        console.error('Error fetching cards:', error);
+        return;
+      }
+      
+      setCards(data || []);
+    } catch (error) {
+      console.error('Error fetching cards:', error);
+    }
   };
 
-  // Add a new card to Firestore
+  // Add a new card to Supabase
   const addCard = async (fileData) => {
-    if (!auth.currentUser) return;
-    await addDoc(collection(db, "cards"), {
-      ...fileData,
-      createdBy: auth.currentUser.uid,
-      createdAt: serverTimestamp(),
-      likeCount: 0
-    });
-    fetchCards(); // Refresh cards after adding
+    if (!userId) return;
+    
+    try {
+      // First, upload the file to Supabase Storage
+      const fileName = `${userId}/${Date.now()}-${fileData.fileName}`;
+      
+      // If fileData contains a File object
+      if (fileData.file instanceof File) {
+        const { data: storageData, error: storageError } = await supabase.storage
+          .from('card-images')
+          .upload(fileName, fileData.file, {
+            upsert: false,
+            metadata: { user_id: userId }
+          });
+
+        if (storageError) {
+          console.error('Error uploading file:', storageError);
+          return;
+        }
+        
+        // Get the public URL for the uploaded file
+        const { data: urlData } = supabase.storage
+          .from('card-images')
+          .getPublicUrl(fileName);
+          
+        // Add record to the cards table
+        const { error } = await supabase
+          .from('cards')
+          .insert({
+            title: fileData.title,
+            url: urlData.publicUrl,
+            type: fileData.file.type,
+            created_by: userId,
+            created_at: new Date().toISOString(),
+            like_count: 0
+          });
+          
+        if (error) {
+          console.error('Error adding card to database:', error);
+          return;
+        }
+      } else {
+        // For cases where we already have a URL (like from object URL)
+        const { error } = await supabase
+          .from('cards')
+          .insert({
+            title: fileData.title,
+            url: fileData.url,
+            type: fileData.type || 'image',
+            created_by: userId,
+            created_at: new Date().toISOString(),
+            like_count: 0
+          });
+          
+        if (error) {
+          console.error('Error adding card to database:', error);
+          return;
+        }
+      }
+      
+      fetchCards(); // Refresh cards after adding
+    } catch (error) {
+      console.error('Error in addCard:', error);
+    }
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setLoggedIn(true);
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const userData = docSnap.data();
-          if (userData.username) {
-            setUsername(userData.username);
-          } else {
-            console.warn("No username field found in Firestore for this user.");
-            setUsername("");
-          }
-        } else {
-          console.warn("No user document found for UID:", user.uid);
-          setUsername("");
+    // Check for active session on component mount
+    const checkSession = async () => {
+      try {
+        console.log("Checking session...");
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) {
+          console.error('Error checking session:', error);
+          setLoading(false);
+          return;
         }
-        await fetchCards(); // Fetch cards when user logs in
-      } else {
-        setLoggedIn(false);
-        setUsername("");
-        setCards([]); // Clear cards on logout
+        console.log("Session:", session);
+        if (session) {
+          setLoggedIn(true);
+          setUserId(session.user.id);
+          const { data: profileData, error: profileError } = await supabase
+            .from('profiles')
+            .select('username')
+            .eq('id', session.user.id)
+            .single();
+          if (profileError) {
+            console.error('Error fetching profile:', profileError);
+          } else if (profileData) {
+            setUsername(profileData.username || '');
+          }
+          await fetchCards();
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error('Error in checkSession:', error);
+        setLoading(false);
       }
-      setLoading(false);
+    };
+    
+    // Set up auth state change listener
+    const authListener = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        setLoggedIn(true);
+        setUserId(session.user.id);
+        
+        // Get user profile
+        const { data: profileData, error: profileError } = await supabase
+          .from('profiles')
+          .select('username')
+          .eq('id', session.user.id)
+          .single();
+          
+        if (profileError) {
+          console.error('Error fetching profile:', profileError);
+        } else if (profileData) {
+          setUsername(profileData.username || '');
+        }
+        
+        await fetchCards();
+      } else if (event === 'SIGNED_OUT') {
+        setLoggedIn(false);
+        setUsername('');
+        setUserId(null);
+        setCards([]);
+      }
     });
-
-    return () => unsubscribe();
+    
+    checkSession();
+    
+    // Clean up subscription on unmount
+    return () => {
+      authListener.subscription?.unsubscribe();
+    };
   }, []);
 
   if (loading) {

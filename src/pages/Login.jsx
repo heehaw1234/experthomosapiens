@@ -1,102 +1,81 @@
-import React, { useState } from 'react';
-import { Box, TextField, Button, Typography, Paper } from '@mui/material';
-import { containerBox, authPaper, titleText, submitButton } from "../styles/authStyles";
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../firebase.js";
-import { Link as MuiLink } from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../supabase.js';
+import '../AuthForm.css';
 
 const Login = ({ setLoggedIn }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      setLoggedIn(true);
-      navigate("/dashboard");
-    } catch (error) {
-      alert("Login failed: " + error.message);
-    }
-  };
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
 
-  const handlePasswordReset = async () => {
-    if (!email) {
-      alert("Please enter your email address above first.");
-      return;
-    }
-    try {
-      await sendPasswordResetEmail(auth, email);
-      alert("Password reset email sent. Check your inbox.");
-    } catch (error) {
-      alert("Failed to send reset email: " + error.message);
-    }
-  };
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
 
-  return (
-    <Box sx={containerBox}>
-      <Paper elevation={6} sx={authPaper}>
-        <Typography variant="h4" align="center" sx={titleText}>
-          Login
-        </Typography>
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
-        >
-          <TextField
-            variant="outlined"
-            label="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            fullWidth
-            required
-          />
-          <TextField
-            variant="outlined"
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            fullWidth
-            required
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            sx={submitButton}
-          >
-            Log In
-          </Button>
-          <Button
-            onClick={handlePasswordReset}
-            variant="text"
-            sx={{ color: '#6a4c93', textTransform: 'none' }}
-          >
-            Forgot your password?
-          </Button>
-        </Box>
-        <Typography
-          variant="body2"
-          align="center"
-          sx={{ mt: 3, color: '#555' }}
-        >
-          Don&apos;t have an account?{' '}
-          <MuiLink
-            component={RouterLink}
-            to="/signup"
-            underline="hover"
-            sx={{ color: '#6a4c93', fontWeight: 500 }}
-          >
-            Sign Up
-          </MuiLink>
-        </Typography>
-      </Paper>
-    </Box>
-  );
+            if (error) {
+                setError(error.message);
+                return;
+            }
+
+            setLoggedIn(true);
+            navigate('/dashboard');
+        } catch (error) {
+            console.error('Error during login:', error);
+            setError('An unexpected error occurred');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="auth-bg">
+            <div className="auth-card">
+                <div className="auth-title">Login</div>
+                {error && <div className="error-message">{error}</div>}
+                <form onSubmit={handleLogin}>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button 
+                        type="submit" 
+                        disabled={loading}
+                        className="login-button"
+                    >
+                        {loading ? 'Logging in...' : 'Login'}
+                    </button>
+                </form>
+                <p className="signup-link">
+                    Don't have an account? <a href="#/signup">Sign up</a>
+                </p>
+            </div>
+        </div>
+    );
 };
 
 export default Login;

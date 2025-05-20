@@ -1,15 +1,21 @@
+import { useEffect } from "react";
 import SearchBar from "../components/SearchBar.jsx";
 import Card from "../components/Card.jsx";
-import { getAuth } from "firebase/auth";
+import { supabase } from "../supabase.js";
 
 const Dashboard = ({ cards, onFileUpload, searchTerm, onSearch }) => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    
-    // Safety check in case component renders before auth is fully loaded
-    if (!user) {
-        return <div className="loading">Loading user data...</div>;
-    }
+    useEffect(() => {
+        // Check if user is authenticated
+        const checkAuth = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                // Handle not authenticated (though Route should handle this already)
+                console.warn("User not authenticated in Dashboard");
+            }
+        };
+        
+        checkAuth();
+    }, []);
     
     const filteredCards = cards.filter(card =>
         card.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -24,14 +30,20 @@ const Dashboard = ({ cards, onFileUpload, searchTerm, onSearch }) => {
             />
             
             <div className="card_blk">
-                {filteredCards.map((card, index) => (
-                    <Card 
-                        key={index} 
-                        title={card.title} 
-                        url={card.url}
-                        type={card.type} 
-                    />
-                ))}
+                {filteredCards.length > 0 ? (
+                    filteredCards.map((card) => (
+                        <Card 
+                            key={card.id} 
+                            id={card.id}
+                            title={card.title} 
+                            url={card.url}
+                            type={card.type}
+                            likeCount={card.like_count || 0}
+                        />
+                    ))
+                ) : (
+                    <p>No cards found. Try uploading a new file!</p>
+                )}
             </div>
             
             <div id="bottomspace1" />

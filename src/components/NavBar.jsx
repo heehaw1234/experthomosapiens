@@ -1,9 +1,9 @@
 import './NavBar.css';
-import {BrowserRouter, Route, Routes, useNavigate, Link} from "react-router-dom";
-import {Button} from "@mui/material";
+import { useNavigate, Link } from "react-router-dom";
+import { Button } from "@mui/material";
+import { supabase } from "../supabase.js";
 
-//add logic about if log in then change buttons to log out only
-const NavBar = ({loggedIn, setLoggedIn, username}) => {
+const NavBar = ({ loggedIn, setLoggedIn, username }) => {
     const navigate = useNavigate();
 
     const goToHome = () => {
@@ -14,8 +14,22 @@ const NavBar = ({loggedIn, setLoggedIn, username}) => {
         navigate("/dashboard");
     }
 
+    const handleLogout = async () => {
+        try {
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                console.error('Error signing out:', error);
+                return;
+            }
+            
+            setLoggedIn(false);
+            navigate("/login");
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
+    }
+
     const goToLogin = () => {
-        setLoggedIn(false);
         navigate("/login");
     }
 
@@ -36,17 +50,17 @@ const NavBar = ({loggedIn, setLoggedIn, username}) => {
         return(
             <div className="auth-buttons">
                 <Button className="btn" variant="outlined" onClick={goToDashBoard}>Home</Button>
-                <Button className="btn" variant="outlined" onClick={goToLogin}>Logout</Button>
+                <Button className="btn" variant="outlined" onClick={handleLogout}>Logout</Button>
             </div>
         )
     }
 
     return (
         <div className="navbar">
-            <div className="noteit" onClick ={goToHome}>
+            <div className="noteit" onClick={goToHome}>
                 Noteit
             </div>
-            <div            //welcome message + CSS
+            <div
                 style={{
                     fontSize: '18px',
                     color: '#6a4c93',
@@ -61,5 +75,3 @@ const NavBar = ({loggedIn, setLoggedIn, username}) => {
 };
 
 export default NavBar;
-
-
