@@ -3,93 +3,110 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  background-color: #ffffffdd;
-  background-image: url("https://images.unsplash.com/photo-1525947088131-b701cd0f6dc3?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+html, body, #root {
+  height: 100%;
   margin: 0;
-  padding: 2rem;
-  height: 100vh;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+  background: linear-gradient(120deg, #f8fafc 0%, #e0c3fc 100%);
+  color: #232946;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 .app {
-  background-color: #ffffffdd;
-  border-radius: 2rem;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,0.92);
+  border-radius: 0;
+  box-shadow: 0 8px 32px rgba(106,76,147,0.08);
 }
 
 /* ========== Topbar ========== */
 .topbar {
-  backdrop-filter: blur(5px);
-  color: #333;
+  background: linear-gradient(90deg, #6a4c93 0%, #1988e8 100%);
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  margin-bottom: 1rem;
+  padding: 1.2rem 3vw;
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  box-shadow: 0 2px 16px rgba(106,76,147,0.10);
+  min-height: 64px;
 }
 
 .noteit {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 2rem;
   color: #6a4c93;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(25,136,232,0.10);
 }
 
 /* ========== Buttons ========== */
 .auth-buttons .btn,
-.MuiDialogActions-root button{
-  background-color: #6a4c93;
+.MuiDialogActions-root button {
+  background: linear-gradient(90deg, #6a4c93 0%, #1988e8 100%);
   color: #fff;
   border: none;
   padding: 0.6rem 1.5rem;
   font-size: 1rem;
   border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background 0.2s, transform 0.15s;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(25,136,232,0.07);
 }
 
 .auth-buttons .btn:hover,
 .MuiDialogActions-root button:hover {
-  background-color: #553175;
-  transform: scale(1.05);
+  background: linear-gradient(90deg, #553175 0%, #1464a5 100%);
+  transform: scale(1.04);
 }
 
 /* ========== Dialog (Login Box) ========== */
 #dialog_login .MuiDialog-paper {
-  width: 50rem;
+  max-width: 400px;
+  width: 90vw;
   padding: 2rem;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 24px rgba(25,136,232,0.10);
 }
 
 .MuiDialogTitle-root {
   color: #6a4c93;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.3rem;
 }
 
 .dialog_content {
   margin-top: 1rem;
   font-size: 1rem;
-  color: #333;
+  color: #232946;
 }
 
 .login {
   width: 100%;
   padding: 0.75rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
+  margin: 0.5rem 0 1rem 0;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
   background: #f8f9fa;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s;
+}
+
+.login:focus {
+  border-color: #6a4c93;
+  outline: none;
 }
 
 /* ========== Function Bar ========== */
@@ -97,9 +114,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem 3vw;
   border-radius: 12px;
   margin-bottom: 2rem;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(25,136,232,0.07);
 }
 
 #functionbar button {
@@ -108,75 +127,26 @@ body {
 
 #search_bar {
   width: 18rem;
+  max-width: 90vw;
   padding: 0.6rem 1rem;
   border-radius: 30px;
-  border: 1px solid #ccc;
+  border: 1px solid #e5e7eb;
   outline: none;
+  background: #f9fafb;
+  transition: border 0.2s;
 }
 
-/* ========== Card Section ========== */
-.card_blk {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
-
-
-#downloadtag {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.25rem auto;
-  width: 12rem;
-  height: 2.5rem;
-  background-color: #6a4c93;
-  color: white;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 1rem;
-  text-align: center;
-}
-
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
-}
-
-.card_img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.card_img:hover {
-  transform: scale(1.03);
-}
-
-.title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
-.likebtn {
-  align-self: center;
-  height: 2.5rem;
-  width: 80%;
-  margin-top: 0.25rem;
+#search_bar:focus {
+  border-color: #6a4c93;
 }
 
 /* ========== Special Interactions ========== */
 button:active {
-  transform: scale(1.1);
+  transform: scale(1.07);
 }
 
 img:active {
-  transform: scale(2.5);
+  transform: scale(1.15);
 }
 
 /* ========== Misc Layout ========== */
@@ -189,10 +159,29 @@ img:active {
 }
 
 .bottombar {
-  color: #333;
+  color: #232946;
+  background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem 3vw;
   border-radius: 12px;
+  box-shadow: 0 -2px 8px rgba(25,136,232,0.03);
+  margin-top: auto;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  #functionbar, .bottombar, .topbar {
+    padding: 1rem 2vw;
+  }
+}
+
+@media (max-width: 600px) {
+  #functionbar, .bottombar, .topbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.7rem 2vw;
+    min-height: unset;
+  }
 }

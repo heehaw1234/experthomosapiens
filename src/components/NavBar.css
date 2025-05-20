@@ -8,15 +8,3 @@
     border-radius: 12px;
     margin-bottom: 1rem;
 }
-
-.logo {
-    height: 50px;
-    width: auto;
-    object-fit: contain;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-}
-
-.logo:hover {
-    transform: scale(1.05);
-}

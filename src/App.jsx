@@ -5,8 +5,9 @@ import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import NavBar from './components/NavBar.jsx';
 import Dashboard from './pages/Dashboard.jsx';
-import { auth } from './firebase.js';
+import { auth, db } from './firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc, collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const App = () => {
   const [cards, setCards] = useState([]);
@@ -15,25 +16,57 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
 
+  // Fetch all cards from Firestore
+  const fetchCards = async () => {
+    const querySnapshot = await getDocs(collection(db, "cards"));
+    const cardsArr = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    setCards(cardsArr);
+  };
+
+  // Add a new card to Firestore
+  const addCard = async (fileData) => {
+    if (!auth.currentUser) return;
+    await addDoc(collection(db, "cards"), {
+      ...fileData,
+      createdBy: auth.currentUser.uid,
+      createdAt: serverTimestamp(),
+      likeCount: 0
+    });
+    fetchCards(); // Refresh cards after adding
+  };
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setLoggedIn(true);
-        const atIndex = user.email.indexOf('@');
-        setUsername(user.email.substring(0, atIndex));
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          if (userData.username) {
+            setUsername(userData.username);
+          } else {
+            console.warn("No username field found in Firestore for this user.");
+            setUsername("");
+          }
+        } else {
+          console.warn("No user document found for UID:", user.uid);
+          setUsername("");
+        }
+        await fetchCards(); // Fetch cards when user logs in
       } else {
         setLoggedIn(false);
-        setUsername('');
+        setUsername("");
+        setCards([]); // Clear cards on logout
       }
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
-
-  const addCard = (fileData) => {
-    setCards(prev => [...prev, fileData]);
-  };
 
   if (loading) {
     return <div>Loading...</div>;
