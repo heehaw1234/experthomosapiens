@@ -11,11 +11,13 @@ html, body, #root {
 
 body {
   font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
-  background: linear-gradient(120deg, #f8fafc 0%, #e0c3fc 100%);
-  color: #232946;
+  background: linear-gradient(120deg, #181c2f 0%, #232946 100%);
+  color: #e0e0e0;
   min-height: 100vh;
   width: 100vw;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .app {
@@ -23,52 +25,73 @@ body {
   min-width: 100vw;
   display: flex;
   flex-direction: column;
-  background: rgba(255,255,255,0.92);
+  background: linear-gradient(120deg, #232946 70%, #181c2f 100%);
   border-radius: 0;
-  box-shadow: 0 8px 32px rgba(106,76,147,0.08);
+  box-shadow: 0 8px 32px rgba(35,41,70,0.18), 0 0 0 100vmax #181c2f;
+  margin: 0;
+  padding: 0;
 }
 
 /* ========== Topbar ========== */
 .topbar {
-  background: linear-gradient(90deg, #6a4c93 0%, #1988e8 100%);
-  color: #fff;
+  background: linear-gradient(90deg, #232946 0%, #353a5a 100%);
+  color: #f7c873;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 3vw;
   border-bottom-left-radius: 1.5rem;
   border-bottom-right-radius: 1.5rem;
-  box-shadow: 0 2px 16px rgba(106,76,147,0.10);
+  box-shadow: 0 4px 24px #23294644, 0 2px 16px #353a5a33;
   min-height: 64px;
+  margin: 0;
 }
 
 .noteit {
   font-weight: 700;
   font-size: 2rem;
-  color: #6a4c93;
+  color: #fffbe6;
   letter-spacing: 1px;
-  text-shadow: 0 2px 8px rgba(25,136,232,0.10);
+  text-shadow: 0 2px 8px #23294655;
+  margin: 0;
 }
 
 /* ========== Buttons ========== */
 .auth-buttons .btn,
-.MuiDialogActions-root button {
-  background: linear-gradient(90deg, #6a4c93 0%, #1988e8 100%);
-  color: #fff;
-  border: none;
+.MuiDialogActions-root button,
+button,
+#downloadtag {
+  background: linear-gradient(90deg, #353a5a 0%, #232946 100%);
+  color: #f7c873;
+  border: 2px solid #353a5a;
   padding: 0.6rem 1.5rem;
   font-size: 1rem;
   border-radius: 30px;
   cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(25,136,232,0.07);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.18s, border 0.18s;
+  font-weight: 700;
+  box-shadow: 0 2px 12px #23294622;
+  outline: none;
+  margin: 0;
 }
 
 .auth-buttons .btn:hover,
-.MuiDialogActions-root button:hover {
-  background: linear-gradient(90deg, #553175 0%, #1464a5 100%);
-  transform: scale(1.04);
+.MuiDialogActions-root button:hover,
+button:hover,
+#downloadtag:hover {
+  background: linear-gradient(90deg, #232946 0%, #353a5a 100%);
+  color: #fffbe6;
+  border-color: #232946;
+  box-shadow: 0 4px 24px #23294633;
+}
+
+button:active,
+#downloadtag:active {
+  transform: scale(0.97);
+}
+
+img:active {
+  transform: scale(1.12);
 }
 
 /* ========== Dialog (Login Box) ========== */
@@ -77,35 +100,39 @@ body {
   width: 90vw;
   padding: 2rem;
   border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 6px 24px rgba(25,136,232,0.10);
+  background: #232946;
+  border: 2px solid #353a5a;
+  box-shadow: 0 8px 32px #23294622;
+  margin: 0 auto;
 }
 
 .MuiDialogTitle-root {
-  color: #6a4c93;
+  color: #f7c873;
   font-weight: 700;
   font-size: 1.3rem;
+  margin: 0;
 }
 
 .dialog_content {
   margin-top: 1rem;
   font-size: 1rem;
-  color: #232946;
+  color: #e0e0e0;
 }
 
 .login {
   width: 100%;
   padding: 0.75rem;
   margin: 0.5rem 0 1rem 0;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #353a5a;
   border-radius: 8px;
-  background: #f8f9fa;
+  background: #181c2f;
   font-size: 1rem;
+  color: #e0e0e0;
   transition: border-color 0.2s;
 }
 
 .login:focus {
-  border-color: #6a4c93;
+  border-color: #f7c873;
   outline: none;
 }
 
@@ -117,12 +144,16 @@ body {
   padding: 1rem 3vw;
   border-radius: 12px;
   margin-bottom: 2rem;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(25,136,232,0.07);
+  background: linear-gradient(90deg, #232946 70%, #353a5a 100%);
+  border: 1.5px solid #353a5a;
+  box-shadow: 0 2px 12px #23294622;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #functionbar button {
   font-weight: 600;
+  margin: 0;
 }
 
 #search_bar {
@@ -130,50 +161,55 @@ body {
   max-width: 90vw;
   padding: 0.6rem 1rem;
   border-radius: 30px;
-  border: 1px solid #e5e7eb;
+  border: 2px solid #353a5a;
   outline: none;
-  background: #f9fafb;
-  transition: border 0.2s;
+  background: #181c2f;
+  color: #f7c873;
+  font-weight: 600;
+  transition: border 0.2s, background 0.2s, color 0.2s;
+  font-size: 1rem;
+  margin: 0;
+  box-shadow: 0 1px 8px #23294611;
 }
 
 #search_bar:focus {
-  border-color: #6a4c93;
-}
-
-/* ========== Special Interactions ========== */
-button:active {
-  transform: scale(1.07);
-}
-
-img:active {
-  transform: scale(1.15);
+  border-color: #232946;
+  background: #232946;
+  color: #fffbe6;
 }
 
 /* ========== Misc Layout ========== */
 #bottomspace1 {
   height: 4rem;
+  margin: 0;
 }
 
 #bottomspace2 {
   height: 1rem;
+  margin: 0;
 }
 
 .bottombar {
-  color: #232946;
-  background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
+  color: #f7c873;
+  background: linear-gradient(90deg, #232946 0%, #353a5a 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 3vw;
   border-radius: 12px;
-  box-shadow: 0 -2px 8px rgba(25,136,232,0.03);
+  box-shadow: 0 -4px 24px #23294622, 0 -2px 8px #353a5a11;
   margin-top: auto;
+  margin-left: 0;
+  margin-right: 0;
+  border-top: 2px solid #353a5a;
 }
 
 /* ========== Responsive ========== */
 @media (max-width: 900px) {
   #functionbar, .bottombar, .topbar {
     padding: 1rem 2vw;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
@@ -183,5 +219,23 @@ img:active {
     gap: 0.5rem;
     padding: 0.7rem 2vw;
     min-height: unset;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .app {
+    min-width: 100vw;
+    padding: 0;
+    margin: 0;
+  }
+  .topbar {
+    font-size: 1.1rem;
+    min-height: 48px;
+    padding: 0.7rem 2vw;
+    margin: 0;
+  }
+  #search_bar {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
   }
 }
