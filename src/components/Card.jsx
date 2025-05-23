@@ -2,7 +2,6 @@ import './Card.css';
 import { useState, useEffect } from "react";
 import { supabase } from "../supabase.js";
 
-// SVG icons as React components
 const DownloadIcon = () => (
   <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
     <path d="M10 3v10m0 0l-4-4m4 4l4-4M4 17h12" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
