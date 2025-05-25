@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import SearchBar from "../components/SearchBar.jsx";
 import Card from "../components/Card.jsx";
 import { supabase } from "../supabase.js";
+import ModSearchBar from "../components/ModSearchBar.jsx";
 
-const Dashboard = ({ cards, onFileUpload, searchTerm, onSearch }) => {
+const Dashboard = ({ cards, onFileUpload, fetchCards, searchTerm, onSearch, username}) => {
     useEffect(() => {
         // Check if user is authenticated
         const checkAuth = async () => {
@@ -23,7 +24,9 @@ const Dashboard = ({ cards, onFileUpload, searchTerm, onSearch }) => {
     
     return (
         <>
+            <ModSearchBar fetchCards={fetchCards}/>
             <SearchBar
+
                 onFileUpload={onFileUpload}
                 searchTerm={searchTerm}
                 onSearch={onSearch}

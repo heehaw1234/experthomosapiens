@@ -10,22 +10,28 @@ import { supabase } from './supabase.js';
 const App = () => {
   const [cards, setCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [curMod, setCurMod] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
   const [userId, setUserId] = useState(null);
-
   // Fetch all cards from Supabase
-  const fetchCards = async () => {
+  const fetchCards = async (modInput) => {
     try {
-      const { data, error } = await supabase
-        .from('cards')
-        .select('*');
-      if (error) {
-        console.error('Error fetching cards:', error);
-        return;
-      }
+      const { data, error } = modInput !== ''?
+          await supabase
+            .from('cards')
+            .select('*')
+            .eq('module_code', modInput) :
+          await supabase
+              .from('cards')
+              .select('*');
+          if (error) {
+            console.error('Error fetching cards:', error);
+            return;
+          }
       setCards(data || []);
+          console.log(data);
     } catch (error) {
       console.error('Error fetching cards:', error);
     }
@@ -58,7 +64,8 @@ const App = () => {
             type: fileData.file.type,
             created_by: userId,
             created_at: new Date().toISOString(),
-            like_count: 0
+            like_count: 0,
+            module_code: fileData.module
           });
         if (error) {
           console.error('Error adding card to database:', error);
@@ -73,14 +80,15 @@ const App = () => {
             type: fileData.type || 'image',
             created_by: userId,
             created_at: new Date().toISOString(),
-            like_count: 0
+            like_count: 0,
+            module_code: fileData.module
           });
         if (error) {
           console.error('Error adding card to database:', error);
           return;
         }
       }
-      fetchCards();
+      fetchCards(curMod);
     } catch (error) {
       console.error('Error in addCard:', error);
     }
@@ -112,7 +120,8 @@ const App = () => {
         setUsername(profileData.username || '');
       }
 
-      await fetchCards();
+      await fetchCards(curMod);
+
       setLoading(false);
     };
 
@@ -158,6 +167,7 @@ const App = () => {
                 <Dashboard
                   cards={cards}
                   onFileUpload={addCard}
+                  fetchCards={fetchCards}
                   searchTerm={searchTerm}
                   onSearch={setSearchTerm}
                   username={username}

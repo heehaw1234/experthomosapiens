@@ -137,7 +137,7 @@ img:active {
 }
 
 /* ========== Function Bar ========== */
-#functionbar {
+.functionbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -151,12 +151,12 @@ img:active {
   margin-right: 0;
 }
 
-#functionbar button {
+.functionbar button {
   font-weight: 600;
   margin: 0;
 }
 
-#search_bar {
+.text_input_bar {
   width: 18rem;
   max-width: 90vw;
   padding: 0.6rem 1rem;
@@ -172,7 +172,7 @@ img:active {
   box-shadow: 0 1px 8px #23294611;
 }
 
-#search_bar:focus {
+.text_input_bar:focus {
   border-color: #232946;
   background: #232946;
   color: #fffbe6;

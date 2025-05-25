@@ -1,11 +1,17 @@
-import { useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import './NavBar.css';
+import React from 'react';
+import AsyncSelect from "react-select/async";
+import { asyncSelectStyles } from "../styles/AsyncSelectStyles";
+import {supabase} from "../supabase.js";
 
 const SearchBar = ({ onFileUpload, searchTerm, onSearch }) => {
     const fileInputRef = useRef(null);
     const [showTitleModal, setShowTitleModal] = useState(false);
     const [pendingFile, setPendingFile] = useState(null);
     const [customTitle, setCustomTitle] = useState("");
+    const [moduleCode, setModuleCode] = useState("");
+
 
     // Open file selector
     const handleUploadClick = () => {
@@ -29,9 +35,11 @@ const SearchBar = ({ onFileUpload, searchTerm, onSearch }) => {
             title: customTitle.trim(),
             file: pendingFile,
             fileName: pendingFile.name,
-            type: pendingFile.type
+            type: pendingFile.type,
+            module: moduleCode.value
         });
         setCustomTitle("");
+        setModuleCode("");
         setPendingFile(null);
         setShowTitleModal(false);
     };
@@ -41,11 +49,31 @@ const SearchBar = ({ onFileUpload, searchTerm, onSearch }) => {
         setShowTitleModal(false);
         setPendingFile(null);
         setCustomTitle("");
+        setModuleCode("");
     };
+
+   const loadOptions = async (inputValue) => {
+
+       const { data, error } = await supabase
+           .from('modules')
+           .select('*')
+           .ilike('value', `${inputValue}%`)
+           .limit(5);
+       if (error) {
+           return [];
+       }
+
+       return data.map(mod => ({
+           label: mod.label,
+           value: mod.value,
+       }));
+   }
+
+
 
     return (
         <>
-            <div id="functionbar">
+            <div className="functionbar">
                 <button className="likebtn" onClick={handleUploadClick}>Upload File</button>
                 <input
                     type="file"
@@ -55,12 +83,13 @@ const SearchBar = ({ onFileUpload, searchTerm, onSearch }) => {
                     accept="image/*,application/pdf"
                 />
                 <input
-                    id="search_bar"
+                    className="text_input_bar"
                     type="text"
                     placeholder="Search by title..."
                     value={searchTerm}
                     onChange={(e) => onSearch(e.target.value)}
                 />
+
             </div>
             {showTitleModal && (
                 <div className="modal-backdrop">
@@ -85,6 +114,16 @@ const SearchBar = ({ onFileUpload, searchTerm, onSearch }) => {
                                     fontSize: "1rem",
                                     width: "100%"
                                 }}
+                            />
+
+                            <AsyncSelect
+                                cacheOptions
+                                loadOptions={loadOptions}
+                                defaultOptions
+                                value={moduleCode}
+                                onChange={(selected) => setModuleCode(selected)}
+                                styles={asyncSelectStyles}
+                                placeholder="Select Module"
                             />
                             <div style={{ display: "flex", gap: "1rem", justifyContent: "flex-end" }}>
                                 <button
