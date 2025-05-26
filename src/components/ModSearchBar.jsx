@@ -1,29 +1,27 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-const ModSearchBar = ({fetchCards}) => {
+const ModSearchBar = ({ fetchCards }) => {
+  const [curMod, setCurMod] = useState('');
 
-    const [curMod, setCurMod] = useState('');
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setCurMod(value);
+    fetchCards(value.toUpperCase()); // Only uppercase when sending to Supabase
+  };
 
-    return (
-        <div className='functionBar'>
-            <form>
-                <input
-                    type="text"
-                    placeholder="Search by module..."
-                    className="text_input_bar"
-                    value={curMod}
-                    onChange={(e) => setCurMod(e.target.value)}
-                />
-                <button
-                    type="submit"
-                    className="like-btn"
-                    onClick={() => fetchCards(curMod)}
-                >
-                    Search
-                </button>
-            </form>
-        </div>
-    )
-}
+  return (
+    <div className="functionBar">
+      <form onSubmit={e => e.preventDefault()}>
+        <input
+          type="text"
+          placeholder="Search by module..."
+          className="text_input_bar"
+          value={curMod}
+          onChange={handleChange}
+        />
+      </form>   
+    </div>
+  );
+};
 
 export default ModSearchBar;

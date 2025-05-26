@@ -53,11 +53,11 @@ const SearchBar = ({ onFileUpload, searchTerm, onSearch }) => {
     };
 
    const loadOptions = async (inputValue) => {
-
+       const upperInput = inputValue.toUpperCase();
        const { data, error } = await supabase
            .from('modules')
            .select('*')
-           .ilike('value', `${inputValue}%`)
+           .ilike('value', `%${upperInput}%`)
            .limit(5);
        if (error) {
            return [];
