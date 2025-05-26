@@ -67,6 +67,9 @@ const NavBar = ({ loggedIn, setLoggedIn, username }) => {
                 }}
             >
                 <MenuItem onClick={handleDashboardClick}>Dashboard</MenuItem>
+                <MenuItem onClick={() => { handleMenuClose(); navigate("/cards-by-module"); }}>
+                  CardsByModule
+                </MenuItem>
                 <MenuItem onClick={goToLogin}>Logout</MenuItem>
             </Menu>
         </div>

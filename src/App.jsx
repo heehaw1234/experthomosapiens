@@ -5,6 +5,7 @@ import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import NavBar from './components/NavBar.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import CardsByModule from './pages/CardsByModule';
 import { supabase } from './supabase.js';
 
 const App = () => {
@@ -180,6 +181,7 @@ const App = () => {
                 <Navigate to="/login" replace />
             }
           />
+          <Route path="/cards-by-module" element={<CardsByModule />} />
           <Route path="/" element={<Navigate to={loggedIn ? "/dashboard" : "/login"} replace />} /> {/* Redirect to dashboard if logged in, else redirect to login, FALLBACK */}
         </Routes>
       </HashRouter>
