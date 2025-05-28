@@ -1,19 +1,16 @@
-# NUS Orbital 2024 (Team Name: expert homo sapiens)
+# NUS Orbital 2025 (Team Name: expert homo sapiens)
 
 ![React](https://img.shields.io/badge/React.js-v18.2.0-blue?logo=react)
 ![Vite](https://img.shields.io/badge/Vite-5.0-purple?logo=vite)
 ![Supabase](https://img.shields.io/badge/Supabase-backend-green?logo=supabase)
-![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
-![Banner](https://raw.githubusercontent.com/yourusername/yourrepo/main/assets/banner.png)
+Orbital is NUS School of Computing’s self-directed, independent software development project. This project is developed by team **expert homo sapiens**. Our team members consist of Tan Yu Hang and Sean Lee.
 
-Orbital is NUS School of Computing’s self-directed, independent software development project. This project is developed by team **expert homo sapiens**.
-
-**Proposed Level of Achievement:** Project Gemini
+**Proposed Level of Achievement:** Gemini
 
 ---
 
-## 🎯 Introducing Our Platform
+## Introducing Our Platform
 
 A centralized platform for NUS students to access academic resources, connect with tutors, and get help on their modules.  
 This web app integrates **note sharing**, **a tutoring network**, and **a course-specific Q&A forum**.
@@ -32,7 +29,7 @@ This project aims to centralize all essential academic support in one platform.
 
 ---
 
-## 🧭 Aims
+## 🎯 Aims
 
 To build an all-in-one academic support system that provides:
 
@@ -104,8 +101,7 @@ To build an all-in-one academic support system that provides:
 
 ## 🧪 Deployment
 
-Coming soon via GitHub Pages / Vercel after Milestone 2.  
-Stay tuned!
+https://heehaw1234.github.io/experthomosapiens
 
 ---
 
@@ -121,9 +117,9 @@ Stay tuned!
 ## 🤝 Team
 
 **Team Name:** expert homo sapiens  
-👨‍💻 Member 1: Name  
-👩‍💻 Member 2: Name
+👨‍💻 Member 1: Tan Yu Hang  
+👩‍💻 Member 2: Sean Lee
 
 ---
 
-_This project is part of the NUS Orbital 2024 programme._
+_This project is part of the NUS Orbital 2025 programme._
