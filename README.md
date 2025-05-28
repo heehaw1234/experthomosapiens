@@ -19,7 +19,7 @@ This web app integrates **note sharing**, **a tutoring network**, and **a course
 
 ## 💡 Motivation
 
-NUS students face fragmented access to academic resources like notes and tutoring. Existing platforms (Studocu, unofficial chats) often:
+NUS students face fragmented access to academic resources like notes and tutoring. Existing platforms (Studocu, Holy Grail, unofficial chats) often:
 
 - Require paid access
 - Contain outdated materials
