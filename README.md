@@ -55,8 +55,8 @@ To build an all-in-one academic support system that provides:
 ## 🚀 Key Features
 
 - ✅ Personalized student & tutor profiles
-- ✅ Note sharing and downloading (PDF)
-- ✅ Forum per module (auto-generated per academic year)
+- ✅ Note sharing and downloading
+- ✅ Forum per module
 - ✅ Search + filter by module code
 - 🔜 Real-time whiteboard & video call support (Milestone 3)
 - 🔜 Admin access for professors and verified content
@@ -66,13 +66,14 @@ To build an all-in-one academic support system that provides:
 ## 🗓 Timeline
 
 ### 🧩 Milestone 1 – Technical Proof of Concept
-- Personalized & verified account/profile system
+- Personalised account login and signup
 - UI/UX for homepage
 - Note upload & download (basic feature)
 - Supabase DB with mod/user schema
 - Search and filter by module code
 
 ### 🔨 Milestone 2 – Functional Prototype
+- Personalized & verified account/profile system
 - Forum per module
 - PDF downloader
 - Note taking feature (tentative)
@@ -93,6 +94,7 @@ To build an all-in-one academic support system that provides:
 | File Storage        | Supabase Storage|
 | Auth & Profiles     | Supabase Auth   |
 | Version Control     | Git + GitHub    |
+|Deployment           | GitHub Pages    |
 
 ---
 
