@@ -16,6 +16,9 @@ const NavBar = ({ loggedIn, setLoggedIn, username }) => {
         navigate("/login");
     };
 
+    const goToProfile = () => {
+        navigate("/profile");
+    }
     const goToSignUp = () => {
         navigate("/signup");
     };
@@ -66,6 +69,7 @@ const NavBar = ({ loggedIn, setLoggedIn, username }) => {
                     horizontal: 'right',
                 }}
             >
+                <MenuItem onClick={goToProfile}>Profile</MenuItem>
                 <MenuItem onClick={handleDashboardClick}>Dashboard</MenuItem>
                 <MenuItem onClick={() => { handleMenuClose(); navigate("/cards-by-module"); }}>
                   CardsByModule

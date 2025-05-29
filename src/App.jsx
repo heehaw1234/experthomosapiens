@@ -7,11 +7,11 @@ import NavBar from './components/NavBar.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import CardsByModule from './pages/CardsByModule';
 import { supabase } from './supabase.js';
+import Profile from "./pages/Profile.jsx";
 
 const App = () => {
   const [cards, setCards] = useState([]);             // array of card objects
   const [searchTerm, setSearchTerm] = useState('');   // string for search input
-  const [curMod, setCurMod] = useState('');           // string for current module filter
   const [loggedIn, setLoggedIn] = useState(false);    // boolean for login state
   const [loading, setLoading] = useState(true);       // boolean for loading state
   const [username, setUsername] = useState('');       // string for username
@@ -21,6 +21,8 @@ const App = () => {
   // async behaves like a promise/multithreading, uses wait and check so that other function is not blocked
   const fetchCards = async (modInput) => {
     try {
+
+      console.log(modInput);
       // fetch all cards, data is an array of objects which contains the card meta data, as seen in the cards table within supabase
       const { data, error } = modInput !== '' ?
         await supabase
@@ -35,7 +37,7 @@ const App = () => {
         return;
       }
       setCards(data || []); // uses empty array if data is null, truthy check, to set array of cards
-      // console.log(data);
+      console.log(data);
     } catch (error) {
       console.error('Error fetching cards:', error);
     }
@@ -92,7 +94,7 @@ const App = () => {
           return;
         }
       }
-      fetchCards(curMod); // re-render the cards after adding a new one
+      fetchCards(''); // re-render the cards after adding a new one
     } catch (error) {
       console.error('Error in addCard:', error);
     }
@@ -126,7 +128,7 @@ const App = () => {
         setUsername(profileData.username || ''); // set the username state variable to the value from the profileData object
       }
 
-      await fetchCards(curMod); // pause all other functions until the fetchCards function is complete
+      await fetchCards(); // pause all other functions until the fetchCards function is complete
       setLoading(false); // set loading to false after the cards have been fetched
     };
 
@@ -182,6 +184,11 @@ const App = () => {
             }
           />
           <Route path="/cards-by-module" element={<CardsByModule />} />
+          <Route path="/profile" element={
+            loggedIn ?
+                <Profile/> :
+                <Navigate to="/login" replace />
+          }/>{/* Redirect to profile, FALLBACK */}
           <Route path="/" element={<Navigate to={loggedIn ? "/dashboard" : "/login"} replace />} /> {/* Redirect to dashboard if logged in, else redirect to login, FALLBACK */}
         </Routes>
       </HashRouter>

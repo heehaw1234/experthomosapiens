@@ -29,6 +29,7 @@ const Card = ({ id, title, url, type, likeCount: initialLikeCount }) => {
     const [hasLiked, setHasLiked] = useState(false);
     const [likeCount, setLikeCount] = useState(initialLikeCount || 0);
     const [userId, setUserId] = useState(null);
+    const [modCode, setModCode] = useState('');
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -46,6 +47,18 @@ const Card = ({ id, title, url, type, likeCount: initialLikeCount }) => {
         };
         fetchUserData();
     }, [id]);
+
+    useEffect(() => {
+        const fetchModCode = async () => {
+            const {data: modCode} = await supabase
+                .from('cards')
+                .select("*")
+                .eq('id', id)
+                .single();
+            if (modCode && modCode.module_code) setModCode(modCode.module_code);
+        }
+        fetchModCode();
+    }, [])
 
     const toggleLike = async () => {
         if (!userId) return;
@@ -114,9 +127,12 @@ const Card = ({ id, title, url, type, likeCount: initialLikeCount }) => {
         }
     };
 
+
     return (
         <div className="card dark-card">
             <div className="cardtop">
+
+                <h3 className="mod-title">{modCode}</h3>
                 <h2 className="title">{title}</h2>
                 <p className="likecount">{likeCount} <span role="img" aria-label="likes">❤️</span></p>
             </div>

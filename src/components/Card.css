@@ -43,8 +43,17 @@
 }
 
 .title {
-  margin: 0 0 1rem 0;
+  margin: auto;
   font-size: 1.18rem;
+  font-weight: 700;
+  color: #e0e0e0;
+  text-align: left;
+  letter-spacing: 0.01em;
+}
+
+.mod-title {
+  margin: 0 0 1rem 0;
+  font-size: 0.6rem;
   font-weight: 700;
   color: #e0e0e0;
   text-align: left;
