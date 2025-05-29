@@ -10,10 +10,14 @@ Orbital is NUS School of Computing’s self-directed, independent software devel
 
 ---
 
-## Introducing Our Platform
+## Introducing NoteIt
 
 A centralized platform for NUS students to access academic resources, connect with tutors, and get help on their modules.  
 This web app integrates **note sharing**, **a tutoring network**, and **a course-specific Q&A forum**.
+
+**Project Poster:** [Link](https://drive.google.com/file/d/1s9w57mq-O_Q-4SfK2bqpstr0f_cD7O7M/view?usp=sharing)
+
+**Project Video:** [Link](https://drive.google.com/file/d/1FZf47QxsX2rIZgxyLn5DXVD0ak3ookdX/view?usp=drive_link)
 
 ---
 
@@ -34,9 +38,8 @@ This project aims to centralize all essential academic support in one platform.
 To build an all-in-one academic support system that provides:
 
 - Verified note sharing
-- Peer and professional tutoring
+- Peer tutoring
 - Course-specific discussion forums
-- Personalized student dashboards
 
 ---
 
@@ -102,15 +105,6 @@ To build an all-in-one academic support system that provides:
 ## 🧪 Deployment
 
 https://heehaw1234.github.io/experthomosapiens
-
----
-
-## 📚 Documentation
-
-- [Milestone 1 Report](https://link-to-your-docs.com)
-- [Wireframes (Figma)](https://figma.com/your-design)
-- [Feature Flowchart](https://draw.io/link)
-- [Dev Kanban Board](https://github.com/users/yourusername/projects)
 
 ---
 
