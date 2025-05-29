@@ -15,7 +15,7 @@ Orbital is NUS School of Computing’s self-directed, independent software devel
 A centralized platform for NUS students to access academic resources, connect with tutors, and get help on their modules.  
 This web app integrates **note sharing**, **a tutoring network**, and **a course-specific Q&A forum**.
 
-**Project Poster:** [Link](https://drive.google.com/file/d/1s9w57mq-O_Q-4SfK2bqpstr0f_cD7O7M/view?usp=sharing)
+**Project Poster:** [Link](https://drive.google.com/file/d/1wSiVpGjtsWLj64QnCwKp8vcX6sYndxE9/view?usp=sharing)
 
 **Project Video:** [Link](https://drive.google.com/file/d/1FZf47QxsX2rIZgxyLn5DXVD0ak3ookdX/view?usp=drive_link)
 
