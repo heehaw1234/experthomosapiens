@@ -112,8 +112,8 @@ https://heehaw1234.github.io/experthomosapiens
 
 ## 🤝 Team
 
-**Team Name:** expert homo sapiens
-**Team ID:** 7557
+**Team Name:** expert homo sapiens  
+**Team ID:** 7557  
 👨‍💻 Member 1: Tan Yu Hang  
 👩‍💻 Member 2: Sean Lee
 
