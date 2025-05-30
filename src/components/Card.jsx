@@ -25,7 +25,7 @@ const LikeIcon = ({ filled }) => (
   </span>
 );
 
-const Card = ({ id, title, url, type, likeCount: initialLikeCount }) => {
+const Card = ({ id, title, url, likeCount: initialLikeCount }) => {
     const [hasLiked, setHasLiked] = useState(false);
     const [likeCount, setLikeCount] = useState(initialLikeCount || 0);
     const [userId, setUserId] = useState(null);

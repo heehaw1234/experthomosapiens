@@ -19,19 +19,16 @@ const App = () => {
 
   // Fetch all cards from Supabase
   // async behaves like a promise/multithreading, uses wait and check so that other function is not blocked
-  const fetchCards = async (modInput) => {
+  const fetchCards = async (modInput = '') => {
     try {
-
-      console.log(modInput);
-      // fetch all cards, data is an array of objects which contains the card meta data, as seen in the cards table within supabase
-      const { data, error } = modInput !== '' ?
-        await supabase
-          .from('cards')
-          .select('*')
-          .eq('module_code', modInput) :
-        await supabase
-          .from('cards')
-          .select('*');
+      const { data, error } = modInput && modInput.trim() !== ''
+        ? await supabase
+            .from('cards')
+            .select('*')
+            .eq('module_code', modInput)
+        : await supabase
+            .from('cards')
+            .select('*');
       if (error) {
         console.error('Error fetching cards:', error);
         return;

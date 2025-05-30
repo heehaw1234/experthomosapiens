@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './NavBar.css';
 import { useNavigate } from "react-router-dom";
 import { Button, Menu, MenuItem } from "@mui/material";
+import { supabase } from "../supabase.js";
 
 const NavBar = ({ loggedIn, setLoggedIn, username }) => {
     const navigate = useNavigate();
@@ -18,7 +19,8 @@ const NavBar = ({ loggedIn, setLoggedIn, username }) => {
 
     const goToProfile = () => {
         navigate("/profile");
-    }
+    };
+
     const goToSignUp = () => {
         navigate("/signup");
     };
@@ -34,6 +36,13 @@ const NavBar = ({ loggedIn, setLoggedIn, username }) => {
     const handleDashboardClick = () => {
         handleMenuClose();
         goToDashBoard();
+    };
+
+    const handleLogout = async () => {
+        handleMenuClose();
+        await supabase.auth.signOut();
+        setLoggedIn(false);
+        navigate("/login");
     };
 
     const loggedOutButtons = () => (
@@ -72,9 +81,9 @@ const NavBar = ({ loggedIn, setLoggedIn, username }) => {
                 <MenuItem onClick={goToProfile}>Profile</MenuItem>
                 <MenuItem onClick={handleDashboardClick}>Dashboard</MenuItem>
                 <MenuItem onClick={() => { handleMenuClose(); navigate("/cards-by-module"); }}>
-                  CardsByModule
+                    CardsByModule
                 </MenuItem>
-                <MenuItem onClick={goToLogin}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
         </div>
     );
