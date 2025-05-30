@@ -70,7 +70,8 @@ To build an all-in-one academic support system that provides:
 - UI/UX for homepage
 - Note upload & download (basic feature)
 - Supabase DB with mod/user schema
-- Search and filter by module code  
+- Search and filter by module code
+  
 **Milestone 1 Report:** [Link](https://docs.google.com/document/d/19a8i1JgYzlBj6f0TPClzlwtk525w9Qf8/edit?usp=sharing&ouid=110603068132574994115&rtpof=true&sd=true)  
 
 ### 🔨 Milestone 2 – Functional Prototype
